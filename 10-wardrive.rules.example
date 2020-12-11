@@ -1,2 +1,0 @@
-SUBSYSTEM=="net", ACTION=="add", DRIVERS=="", ATTR{address}=="", ATTR{type}=="1", KERNEL=="wlan*", NAME="wlan0", ENV{NM_UNMANAGED}="1", RUN+="will start the systemd service here"
-SUBSYSTEM=="net", ACTION=="remove", DRIVERS=="", ATTR{address}=="", ATTR{type}=="1", KERNEL=="wlan*", NAME="wlan0", RUN+="will stop the systemd service here"
