@@ -2,7 +2,7 @@
 if lsblk | grep sd; then
 	mount -a
 	if test -f /media/wardrive-usb/test; then
-		cp -n /opt/wardriving/* /home/kali/usb-mnt/autodrive/
+		cp -n /opt/wardriving/* /media/wardrive-usb/
 		sleep 5
 		umount -l /media/wardrive-usb/
 	else
