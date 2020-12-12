@@ -1,1 +1,1 @@
-UUID=	/path/to/usb	auto	defaults,nofail	0	0
+/dev/sda1	/media/wardrive-usb	auto	defaults,nofail	0	0
