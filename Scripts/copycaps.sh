@@ -1,5 +1,4 @@
 #!/bin/bash
-
 if lsblk | grep sd; then
 	mount -a
 	if test -f /media/wardrive-usb/test; then
