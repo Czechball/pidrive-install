@@ -2,10 +2,10 @@
 
 if lsblk | grep sd; then
 	mount -a
-	if test -f /path/to/usb/test; then
-		cp -n /path/to/captures/* /home/kali/usb-mnt/autodrive/
+	if test -f /media/wardrive-usb/test; then
+		cp -n /opt/wardriving/* /home/kali/usb-mnt/autodrive/
 		sleep 5
-		umount -l /path/to/usb/
+		umount -l /media/wardrive-usb/
 	else
 		echo "Error, test file not present on usb"
 		exit
