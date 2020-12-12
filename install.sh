@@ -30,7 +30,22 @@ cd ..
 # TODO: Prompt user to select from connected wireless interfaces
 # Right now, will always use wlan0 for hcxdumptool
 
-cp "Misc/"
+cp Misc/10-wardrive.temp.rules /etc/udev/rules.d
+
+# Add sda1 to fstab
+
+cat Misc/fstab.example >> /etc/fstab
+
+# Copy scripts to /usr/bin
+
+cp Scripts/* /usr/bin/
+
+# Create wardriving directories
 
 mkdir -p /media/wardrive-usb
 mkdir -p /opt/wardriving
+
+# Copy services
+
+cp Services/* /etc/systemd/system/
+systemctl daemon-reload
