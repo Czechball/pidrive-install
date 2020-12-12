@@ -1,5 +1,5 @@
 [Unit]
-Description=hcxdumptool
+Description=hcx
 
 [Service]
 User=root
@@ -9,7 +9,7 @@ RestartSec=15
 StartLimitBurst=5
 StartLimitIntervalSec=0
 Type=simple
-ExecStart=/usr/bin/starthcx.sh
+ExecStart=/usr/bin/hcx.sh
 
 [Install]
 WantedBy=default.target
