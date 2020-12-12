@@ -22,10 +22,11 @@ apt install -y "$PACKAGES"
 # Clone hcxdumptool from github, compile it and install
 
 git clone https://github.com/ZerBea/hcxdumptool.git
-cd hcxdumptool
+(
+cd hcxdumptool || exit
 make
 sudo make install
-cd ..
+)
 
 # TODO: Prompt user to select from connected wireless interfaces
 # Right now, will always use wlan0 for hcxdumptool
@@ -49,3 +50,8 @@ mkdir -p /opt/wardriving
 
 cp Services/* /etc/systemd/system/
 systemctl daemon-reload
+systemctl unmask copycaps
+systemctl enable copycaps
+systemctl unmask hcx
+systemctl enable hcx
+
