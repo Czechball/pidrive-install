@@ -1,1 +1,1 @@
-git libcurl4-openssl-dev libssl-dev
+pkg-config git libcurl4-openssl-dev libssl-dev
