@@ -17,7 +17,7 @@ apt upgrade -y
 
 echo "Installing dependencies..."
 
-apt install -y "$PACKAGES"
+apt install -y $PACKAGES
 
 # Clone hcxdumptool from github, compile it and install
 
@@ -55,3 +55,9 @@ systemctl enable copycaps
 systemctl unmask hcx
 systemctl enable hcx
 
+# Disable services taking over wlan1
+
+systemctl stop wpa_supplicant
+systemctl disable wpa_supplicant
+systemctl stop avahi-daemon
+systemctl disable avahi-daemon
