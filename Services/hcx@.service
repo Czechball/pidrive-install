@@ -1,0 +1,13 @@
+[Unit]
+Description=hcx on %I
+
+[Service]
+User=root
+Group=root
+Restart=always
+RestartSec=15
+Type=simple
+ExecStart=/usr/bin/hcx.sh %i
+
+[Install]
+WantedBy=default.target
