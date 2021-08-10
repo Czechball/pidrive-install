@@ -19,45 +19,29 @@ echo "Installing dependencies..."
 
 apt install -y $PACKAGES
 
+echo "Reinstalling kernel headers so we can compile drivers..."
+
+# "Repair" raspberry pi kernel headers - work in  progress
+#apt install --reinstall raspberrypi-kernel-headers
+#rm /usr/lib/???
+#apt install ???
+
 # Clone hcxdumptool from github, compile it and install
 
-git clone https://github.com/ZerBea/hcxdumptool.git
-(
-cd hcxdumptool || exit
-make
-sudo make install
-)
-
-# TODO: Prompt user to select from connected wireless interfaces
-# Right now, will always use wlan0 for hcxdumptool
-
-cp Misc/10-wardrive.temp.rules /etc/udev/rules.d
-
-# Add sda1 to fstab
-
-cat Misc/fstab.example >> /etc/fstab
-
-# Copy scripts to /usr/bin
+#idk if this works, needs testing
+sudo -u pi bash -c 'cd ~;git clone https://github.com/ZerBea/hcxdumptool.git;cd hcxdumptool; make; sudo make install'
 
 cp Scripts/* /usr/bin/
 
-# Create wardriving directories
+# Create wardriving directory
 
-mkdir -p /media/wardrive-usb
-mkdir -p /opt/wardriving
+mkdir -p /opt/wardriving/logs
 
 # Copy services
 
 cp Services/* /etc/systemd/system/
 systemctl daemon-reload
-systemctl unmask copycaps
-systemctl enable copycaps
-systemctl unmask hcx
-systemctl enable hcx
 
-# Disable services taking over wlan1
+# Disable services taking over wireless interfaces
 
-systemctl stop wpa_supplicant
-systemctl disable wpa_supplicant
-systemctl stop avahi-daemon
-systemctl disable avahi-daemon
+systemctl --now disable avahi-daemon
