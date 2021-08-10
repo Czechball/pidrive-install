@@ -5,7 +5,7 @@ Description=hcx on %I
 User=root
 Group=root
 Restart=always
-RestartSec=15
+RestartSec=10
 Type=simple
 ExecStart=/usr/bin/hcx.sh %i
 
