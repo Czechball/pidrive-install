@@ -1,4 +1,0 @@
-ACTION=="add", SUBSYSTEM=="net", KERNEL=="wlan*", ENV{NM_UNMANAGED}="1", RUN+="systemctl start hcx"
-ACTION=="remove", SUBSYSTEM=="net", KERNEL=="wlan*", RUN+="systemctl stop hcx"
-ACTION=="add", SUBSYSTEM=="usb", KERNEL=="sda1*", RUN+="systemctl start copycaps"
-ACTION=="remove", SUBSYSTEM=="usb", KERNEL=="sda1*", RUN+="systemctl stop copycaps"
