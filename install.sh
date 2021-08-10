@@ -23,7 +23,9 @@ echo "Reinstalling kernel headers so we can compile drivers..."
 
 # "Repair" raspberry pi kernel headers - work in  progress
 apt --reinstall install raspberrypi-kernel raspberrypi-kernel-headers -y
+rm -rf /lib/modules/*/build
 apt --reinstall install raspberrypi-kernel-headers -y
+#reboot
 
 ##
 #idk if this works, needs testing
