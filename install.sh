@@ -22,14 +22,28 @@ apt install -y $PACKAGES
 echo "Reinstalling kernel headers so we can compile drivers..."
 
 # "Repair" raspberry pi kernel headers - work in  progress
-#apt install --reinstall raspberrypi-kernel-headers
-#rm /usr/lib/???
-#apt install ???
+apt --reinstall install raspberrypi-kernel raspberrypi-kernel-headers -y
+apt --reinstall install raspberrypi-kernel-headers -y
 
-# Clone hcxdumptool from github, compile it and install
-
+##
 #idk if this works, needs testing
-sudo -u pi bash -c 'cd ~;git clone https://github.com/ZerBea/hcxdumptool.git;cd hcxdumptool; make; sudo make install'
+#this needs to be moved into another script to be executed after reboot after kernel "repair"
+
+# Clone and install hcxdumptool
+
+sudo -u pi bash -c 'cd ~;git clone https://github.com/ZerBea/hcxdumptool.git;cd hcxdumptool;make;sudo make install'
+
+# Clone and install hcxtools
+
+sudo -u pi bash -c 'cd ~;git clone https://github.com/ZerBea/hcxtools.git;cd hcxtools;sudo make install'
+
+# Clone and install realtek_rtwifi
+# Blacklist 8188eu, r8188eu and rtl8xxxu
+
+printf "blacklist 8188eu\nblacklist r8188eu\nblacklist rtl8xxxu" > /etc/modprobe.d/realtek.conf
+sudo -u pi bash -c 'cd ~;git clone https://github.com/kimocoder/realtek_rtwifi;cd realtek_wifi;make;sudo make install'
+
+##
 
 cp Scripts/* /usr/bin/
 
