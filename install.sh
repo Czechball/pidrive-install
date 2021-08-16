@@ -65,4 +65,4 @@ echo "To finish the kernel-headers fix, please reboot. Then run $SCRIPTPATH/fina
 #idk if this works, needs testing
 #this needs to be moved into another script to be executed after reboot after kernel "repair"
 
-printf "\n----------\nTo finish pidrive-install, please run $SCRIPTPATH/finalize.sh\n----------\n"
+printf "\n----------\nTo finish pidrive-install, please run $SCRIPTPATH/finalize.sh\n----------\n" >> /etc/motd
