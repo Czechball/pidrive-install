@@ -1,1 +1,1 @@
-pkg-config git libcurl4-openssl-dev libssl-dev hostapd
+pkg-config git libcurl4-openssl-dev libssl-dev hostapd macchanger
