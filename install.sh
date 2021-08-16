@@ -32,16 +32,20 @@ apt install -y $PACKAGES
 
 # Fix mt7610u drivers, see https://github.com/raspberrypi/firmware/issues/1563
 
-echo "Checking if the correct version (1:20190114-2+rpt1) of firmware-misc-nonfree is installed... "
+# echo "Checking if the correct version (1:20190114-2+rpt1) of firmware-misc-nonfree is installed... "
 
-if (apt list firmware-misc-nonfree | grep 20190114-2 > /dev/null); then
-   echo "Success, skipping reinstall"
-else
-   echo "Correct version not found, installing the correct one..."
-   sudo -u pi bash -c 'wget http://ftp.uk.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-misc-nonfree_20190114-2_all.deb'
-   dpkg -i firmware-misc-nonfree_20190114-2_all.deb
-fi
+# if (apt list firmware-misc-nonfree | grep 20190114-2 > /dev/null); then
+#    echo "Success, skipping reinstall"
+# else
+#    echo "Correct version not found, installing the correct one..."
+#    sudo -u pi bash -c 'wget http://ftp.uk.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-misc-nonfree_20190114-2_all.deb'
+#    dpkg -i firmware-misc-nonfree_20190114-2_all.deb
+# fi
 
+# Check doesn't work
+
+sudo -u pi bash -c 'wget http://ftp.uk.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-misc-nonfree_20190114-2_all.deb'
+dpkg -i firmware-misc-nonfree_20190114-2_all.deb
 apt-mark hold firmware-misc-nonfree
 
 echo "Reinstalling kernel headers so we can compile drivers... (this might take a while)"
