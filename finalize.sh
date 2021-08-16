@@ -9,7 +9,7 @@ fi
 
 # Remove warning in motd
 
-if (grep "To finish pidrive-install" /etc/motd); then
+if (grep "To finish pidrive-install" /etc/motd > /dev/null); then
 	head -n -4 /etc/motd > /etc/motd
 fi
 

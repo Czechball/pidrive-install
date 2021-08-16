@@ -34,7 +34,7 @@ apt install -y $PACKAGES
 
 echo "Checking if the correct version (1:20190114-2+rpt1) of firmware-misc-nonfree is installed... "
 
-if (apt list firmware-misc-nonfree | grep 20190114-2); then
+if (apt list firmware-misc-nonfree | grep 20190114-2 > /dev/null); then
    echo "Success, skipping reinstall"
 else
    echo "Correct version not found, installing the correct one..."
