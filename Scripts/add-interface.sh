@@ -46,7 +46,7 @@ fi
 echo "Adding interface $INTERFACE_NAME"
 
 echo "Adding dhcpcd exclusion"
-echo "denyinterfaces $INTERFACE" >> /etc/dhcpcd.conf
+echo "denyinterfaces $INTERFACE_NAME" >> /etc/dhcpcd.conf
 
 echo "Creating udev rule"
 echo "SUBSYSTEM==\"net\", ACTION==\"add\", ATTR{address}==\"$MAC\", ATTR{type}==\"1\", KERNEL==\"wlan*\", NAME=\"$INTERFACE_NAME\", ENV{NM_UNMANAGED}=\"1\", RUN+=\"systemctl start hcx@$INTERFACE_NAME\"" >> /etc/udev/rules.d/10-wardrive.rules
