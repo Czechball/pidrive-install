@@ -6,6 +6,8 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+touch /opt/wardriving/interfaces.txt
+
 read_interface()
 {
    read -r -p "Enter a name for your interface (no spaces or special chars) (default $INTERFACE): " INTERFACE_NAME
