@@ -26,8 +26,6 @@ for ITEM in ${INTERFACES[@]}; do
    echo "[$NUM] $ITEM - MAC: $MAC, $STATUS"
 done
 
-echo "TEST ${INTERFACES[1]}"
-
 read -r -p "Select interface (1 - $NUM): "
 SELECTION=$((REPLY - 1))
 if [ $SELECTION -lt $NUM ]; then
@@ -47,8 +45,6 @@ if (grep $INTERFACE_NAME /opt/wardriving/interfaces.txt); then
 fi
 
 echo "Adding interface $INTERFACE_NAME"
-
-exit
 
 echo "Adding dhcpcd exclusion"
 echo "denyinterfaces $INTERFACE_NAME" >> /etc/dhcpcd.conf
