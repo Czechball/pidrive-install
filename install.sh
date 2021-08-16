@@ -19,7 +19,17 @@ echo "Installing dependencies..."
 
 apt install -y $PACKAGES
 
+# Fix mt7610u drivers, see https://github.com/raspberrypi/firmware/issues/1563
+
+sudo -u pi bash -c 'wget http://ftp.uk.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-misc-nonfree_20190114-2_all.deb'
+dpkg -i firmware-misc-nonfree_20190114-2_all.deb
+apt-mark hold firmware-misc-nonfree
+
 echo "Reinstalling kernel headers so we can compile drivers..."
+
+# Remount /boot as read-write
+
+mount -o remount,rw /boot
 
 # "Repair" raspberry pi kernel headers - work in  progress
 apt --reinstall install raspberrypi-kernel raspberrypi-kernel-headers -y
