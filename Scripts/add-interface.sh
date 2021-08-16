@@ -62,7 +62,7 @@ echo "Writing info to config"
 echo "$MAC,$INTERFACE_NAME" >> /opt/wardriving/interfaces.txt
 
 echo "Enabling service"
-systemctl enable hcx@"$INTERFACE_NAME"
+systemctl enable hcx@"$INTERFACE_NAME" --now
 
 echo "Reĺoading udev rules..."
 udevadm control --reload-rules
