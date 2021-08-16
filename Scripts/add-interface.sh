@@ -29,10 +29,14 @@ done
 read -r -p "Select interface (1 - $NUM): "
 SELECTION=$((REPLY - 1))
 if [ $SELECTION -lt $NUM ]; then
+   if (grep "$MAC" /opt/wardriving/interfaces.txt > /dev/null); then
+      echo "Error, selected interface was already added in /opt/wardriving/interfaces.txt"
+      exit 1
+   fi
    echo "Selected interface: ${INTERFACES[$SELECTION]}"
 else
    echo "Select a valid number between 1 and $NUM"
-   exit
+   exit 1
 fi
 
 INTERFACE=${INTERFACES[$SELECTION]}
