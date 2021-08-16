@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $EUID -ne 0 ]]; then
+   echo "Run this script as root" 
+   exit 1
+fi
+
 # This script should be executed after rebooting after finishing install.sh
 
 # Clone and install hcxdumptool
