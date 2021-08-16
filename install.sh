@@ -34,6 +34,8 @@ fi
 
 # Check doesn't work
 
+apt update
+
 sudo -u pi bash -c 'wget http://ftp.uk.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-misc-nonfree_20190114-2_all.deb'
 dpkg -i firmware-misc-nonfree_20190114-2_all.deb
 apt-mark hold firmware-misc-nonfree

@@ -43,7 +43,7 @@ fi
 
 echo "installing realtek_rtwifi by Kimocoder..."
 
-sudo -u pi bash -c 'cd ~;git clone https://github.com/kimocoder/realtek_rtwifi;cd realtek_wifi;make;sudo make install'
+sudo -u pi bash -c 'cd ~;git clone https://github.com/kimocoder/realtek_rtwifi;cd realtek_rtwifi;make;sudo make install'
 
 cp Scripts/* /usr/bin/
 
@@ -58,7 +58,8 @@ systemctl daemon-reload
 
 # Disable services taking over wireless interfaces
 
-systemctl --now disable avahi-daemon
+systemctl --now disable avahi-daemon.service
+systemctl --now disable avahi-daemon.socket
 # Not sure if this is necessary? Needs testing
 #systemctl --now disable wpa_supplicant
 
