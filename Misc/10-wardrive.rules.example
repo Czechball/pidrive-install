@@ -1,2 +1,2 @@
-SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="$MAC", ATTR{type}=="1", KERNEL=="wlan*", NAME="$INTERFACE", ENV{NM_UNMANAGED}="1", RUN+="systemctl start hcx@$INTERFACE"
-SUBSYSTEM=="net", ACTION=="remove", ATTR{address}=="$MAC", ATTR{type}=="1", KERNEL=="wlan*", NAME="$INTERFACE", RUN+="systemctl stop hcx@$INTERFACE"
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="$MAC", ATTR{type}=="1", KERNEL=="wlan*", NAME="$INTERFACE_NAME", ENV{NM_UNMANAGED}="1", RUN+="systemctl start hcx@$INTERFACE_NAME"
+SUBSYSTEM=="net", ACTION=="remove", ATTR{address}=="$MAC", ATTR{type}=="1", KERNEL=="wlan*", NAME="$INTERFACE_NAME", RUN+="systemctl stop hcx@$INTERFACE_NAME"
