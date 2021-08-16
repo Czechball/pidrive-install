@@ -1,1 +1,1 @@
-pkg-config git libcurl4-openssl-dev libssl-dev hostapd macchanger zip jq
+pkg-config git libcurl4-openssl-dev libssl-dev hostapd macchanger zip jq build-essential libelf-dev
