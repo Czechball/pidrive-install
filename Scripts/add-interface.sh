@@ -13,8 +13,9 @@ read_interface()
 }
 
 INTERFACES=$(hcxdumptool -I | tail -n +2 | cut -d " " -f 2)
+INTERFACES=($INTERFACES)
 
-for ITEM in $INTERFACES; do
+for ITEM in ${INTERFACES[@]}; do
    NUM=$((NUM + 1))
    MAC=$(macchanger "$ITEM" | head -n1 | cut -d " " -f 5)
    if (grep "$MAC" /opt/wardriving/interfaces.txt > /dev/null); then
@@ -24,6 +25,8 @@ for ITEM in $INTERFACES; do
    fi
    echo "[$NUM] $ITEM - MAC: $MAC, $STATUS"
 done
+
+echo "TEST ${INTERFACES[1]}"
 
 read -r -p "Select interface (1 - $NUM): "
 SELECTION=$((REPLY - 1))
@@ -44,6 +47,8 @@ if (grep $INTERFACE_NAME /opt/wardriving/interfaces.txt); then
 fi
 
 echo "Adding interface $INTERFACE_NAME"
+
+exit
 
 echo "Adding dhcpcd exclusion"
 echo "denyinterfaces $INTERFACE_NAME" >> /etc/dhcpcd.conf
