@@ -61,7 +61,7 @@ echo "SUBSYSTEM==\"net\", ACTION==\"add\", ATTR{address}==\"$MAC\", ATTR{type}==
 echo "SUBSYSTEM==\"net\", ACTION==\"remove\", ATTR{address}==\"$MAC\", ATTR{type}==\"1\", KERNEL==\"wlan*\", NAME=\"$INTERFACE_NAME\", RUN+=\"systemctl stop hcx@$INTERFACE_NAME\"" >> /etc/udev/rules.d/10-wardrive.rules
 
 echo "Writing info to config"
-echo "$MAC,$INTERFACE_NAME" >> /opt/wardriving/interfaces.txt
+echo "$MAC;$INTERFACE_NAME" >> /opt/wardriving/interfaces.txt
 
 echo "Enabling service"
 systemctl enable hcx@"$INTERFACE_NAME" --now
