@@ -53,8 +53,7 @@ apt --reinstall install raspberrypi-kernel-headers -y
 
 # Update and upgrade the system, install dependencies
 
-echo "Running apt update and apt upgrade, this will take a while"
-apt update
+echo "Running apt upgrade, this will take a while"
 apt upgrade -y
 
 echo "Installing dependencies..."
