@@ -3,6 +3,8 @@ SCRIPTPATH="$( cd "$(dirname "$0")" || { echo -e "\e[91mERROR\e[0m: Script path 
 
 #install.sh
 
+set -e
+
 PACKAGES=$(cat packages.txt)
 
 if [[ $EUID -ne 0 ]]; then
@@ -11,14 +13,6 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 echo "Warning: This script will only work on Raspberry Pi OS and possibly other Debian based systems."
-
-# Check internet connectivity
-
-if (curl -s google.com > /dev/null); then
-   :
-else
-   echo "Error, can't reach Google. Make sure you have internet connectivity before running this script."
-fi
 
 # Fix mt7610u drivers, see https://github.com/raspberrypi/firmware/issues/1563
 
