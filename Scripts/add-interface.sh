@@ -46,11 +46,6 @@ MAC=$(macchanger ${INTERFACES[$SELECTION]} | head -n1 | cut -d " " -f 5)
 
 read_interface
 
-if (grep $INTERFACE_NAME /opt/wardriving/interfaces.txt > /dev/null); then
-   echo "Error, name already chosen. Please enter a new one."
-   exit 1
-fi
-
 echo "Adding interface $INTERFACE_NAME"
 
 echo "Adding dhcpcd exclusion"
