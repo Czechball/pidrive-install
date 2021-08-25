@@ -52,7 +52,7 @@ echo "Adding dhcpcd exclusion"
 echo "denyinterfaces $INTERFACE_NAME" >> /etc/dhcpcd.conf
 
 echo "Creating udev rule"
-echo "SUBSYSTEM==\"ieee80211\", ACTION==\"add\", ATTR{address}==\"$MAC\", ATTR{type}==\"1\", NAME=\"$INTERFACE_NAME\", ENV{NM_UNMANAGED}=\"1\", RUN+=\"systemctl start hcx@$INTERFACE_NAME\"" >> /etc/udev/rules.d/10-wardrive.rules
+echo "SUBSYSTEM==\"ieee80211\", ACTION==\"add\", ATTR{address}==\"$MAC\", ATTR{type}==\"1\", NAME=\"$INTERFACE_NAME\", ENV{NM_UNMANAGED}=\"1\"" >> /etc/udev/rules.d/10-wardrive.rules
 
 echo "Writing info to config"
 echo "$MAC;$INTERFACE_NAME" >> /opt/wardriving/interfaces.txt
