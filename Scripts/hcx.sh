@@ -3,6 +3,10 @@
 DIRECTORY="/opt/wardriving"
 INTERFACE="$1"
 
+ip link set "$INTERFACE" down
+iw dev "$INTERFACE" set type monitor
+ip link set "$INTERFACE" up
+
 wardrive()
 {
         HCX_OPTS=$(grep "$INTERFACE" /opt/wardriving/interfaces.txt | cut -d ";" -f 3)
