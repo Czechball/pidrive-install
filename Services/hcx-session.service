@@ -1,0 +1,11 @@
+[Unit]
+Description=hcx session manager
+
+[Service]
+User=root
+Group=root
+Type=oneshot
+ExecStart=/usr/bin/hcx-session.sh
+
+[Install]
+WantedBy=default.target
