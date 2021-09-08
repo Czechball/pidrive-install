@@ -70,6 +70,7 @@ mkdir -p /opt/wardriving/logs
 
 cp Services/* /etc/systemd/system/
 systemctl daemon-reload
+systemctl enable hcx-session
 
 # Disable services taking over wireless interfaces
 
