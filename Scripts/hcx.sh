@@ -8,6 +8,8 @@ else
         SESSION="0000"
 fi
 
+mkdir "$DIRECTORY"/"$SESSION"
+
 ip link set "$INTERFACE" down
 iw dev "$INTERFACE" set type monitor
 ip link set "$INTERFACE" up
