@@ -24,6 +24,7 @@ wardrive()
 }
 
 if (iw dev | grep "$INTERFACE"); then
+        echo "--- Session $SESSION has started ---"
         wardrive >> "$DIRECTORY"/logs/hcxdumptool-"$INTERFACE".log
-        echo "hcxdumptool stopped" >> "$DIRECTORY"/logs/hcxdumptool-"$INTERFACE".log
+        echo "--- Session $SESSION has stopped ---" >> "$DIRECTORY"/logs/hcxdumptool-"$INTERFACE".log
 fi
