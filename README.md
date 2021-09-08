@@ -47,7 +47,7 @@ These interfaces were tested with this setup and were confirmed to work without 
 - Alfa AWUS036ACH (RTL8812au) [dual band] - requires [rtl8812au](https://github.com/aircrack-ng/rtl8812au), doesn't support NETLINK (hcxdumptool will complain but it works fine) | **Recommended, has very good reception on both bands**
 - Alfa AWUS036NH (RT3070) [single band] - no extra requirements, full NETLINK support. | **Recommended for single band usage, has great reception**
 - TP-Link TL-WN722N v2/v3 (RTL8188EUS) [single band] - requires [realtek-rtwifi](https://github.com/kimocoder/realtek_rtwifi) for best performance, has full NETLINK support | **Pretty good performance for its size, similar to Archer T2UH**
-- AC1200 Techkey (generic, might have different names or brands) (RTL88x2bu) [dual band] - requires [rtl88x2bu](https://github.com/cilynx/rtl88x2bu), doesn't support NETLINK (hcxdumptool will complain but it works fine). This interace is sometimes branded as just simply "Wifi 1200 USB3.0" with no mentions of brand or model. Be cautious about the chipset when buying these, only RTL88x2bu has been tested so far. | **Mediocre performance on both bands, can be a good addition to an existing system. Capture 5 GHz just fine.**
+- AC1200 Techkey (generic, might have different names or brands) (RTL88x2bu) [dual band] - requires [rtl88x2bu](https://github.com/cilynx/rtl88x2bu), doesn't support NETLINK (hcxdumptool will complain but it works fine). This interace is sometimes branded as just simply "Wifi 1200 USB3.0" with no mentions of brand or model. Be cautious about the chipset when buying these, only RTL88x2bu has been tested so far. | **Mediocre performance on both bands, can be a good addition to an existing system. Captures 5 GHz just fine.**
 
 ### Known bad cards
 
@@ -59,6 +59,15 @@ These interfaces were tested and proved problematic, unstable or just straight u
 ## Usage
 
 After interfaces are added and services are enabled, hcxdumptool will start on boot. Capture files will be saved in `/opt/wardriving` in folders numbered after their respective session. Sessions are incremented after each system boot, this is managed by the `hcx-sesssion` service. Logs (hcxdumptool output) are saved in `/opt/wardriving/logs`
+
+## TODO
+
+- Make use of hcxdumptool's client-server functionality
+- More automatization
+- WiFi hotspot from Pi's integrated interface for easy SSH access
+- Web interface with hcxdumptool log and other options
+- Make use of systemd.device for better service management
+- Provide this system as a flashable image 
 
 ## Disclaimer
 
