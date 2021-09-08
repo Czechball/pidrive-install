@@ -5,12 +5,19 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+TEMPFILE=$(mktemp)
+
+make-git()
+{
+	sudo -u pi bash -c "cd ~;git clone \"$1\";cd \"$2\";make;sudo make install"
+}
+
 # This script should be executed after rebooting after finishing install.sh
 
 # Remove warning in motd
 
 if (grep "To finish pidrive-install" /etc/motd > /dev/null); then
-	head -n -4 /etc/motd > /etc/motd
+	head -n -4 /etc/motd > "$TEMPFILE" && mv "$TEMPFILE" /etc/motd
 fi
 
 # Clone and install hcxdumptool
@@ -18,7 +25,7 @@ if (which hcxdumptool); then
 	echo "hcxdumptool is already installed"
 else
 	echo "hcxdumptool not found, installing..."
-	sudo -u pi bash -c 'cd ~;git clone https://github.com/ZerBea/hcxdumptool.git;cd hcxdumptool;make;sudo make install'
+	make-git "https://github.com/ZerBea/hcxdumptool.git" hcxdumptool
 fi
 
 # Clone and install hcxtools
@@ -26,7 +33,7 @@ if (which hcxpcapngtool); then
 	echo "hcxtools are already installed"
 else
 	echo "hcxtools not found, installing..."
-	sudo -u pi bash -c 'cd ~;git clone https://github.com/ZerBea/hcxtools.git;cd hcxtools;sudo make install'
+	make-git "https://github.com/ZerBea/hcxtools.git" hcxtools
 fi
 
 # Clone and install realtek_rtwifi
@@ -43,7 +50,15 @@ fi
 
 echo "installing realtek_rtwifi by Kimocoder..."
 
-sudo -u pi bash -c 'cd ~;git clone https://github.com/kimocoder/realtek_rtwifi;cd realtek_rtwifi;make;sudo make install'
+make-git "https://github.com/kimocoder/realtek_rtwifi.git" realtek_rtwifi
+
+echo "installing rtl8812au..."
+
+make-git "https://github.com/aircrack-ng/rtl8812au.git" rtl8812au
+
+echo "installing rtl88x2bu..."
+
+sudo -u pi bash -c "cd ~;git clone \"https://github.com/cilynx/rtl88x2bu.git\";cd \"rtl88x2bu\";make ARCH=arm;sudo make install"
 
 cp Scripts/* /usr/bin/
 
