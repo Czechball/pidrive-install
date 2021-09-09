@@ -54,6 +54,7 @@ These interfaces were tested with this setup and were confirmed to work without 
 These interfaces were tested and proved problematic, unstable or just straight up don't work
 
 - Alfa AWUS1900 (RTL8814au) [dual band] - this is a card with excellent performance but sadly its driver doesn't support packet injection. Monitor mode works ([https://github.com/aircrack-ng/rtl8814au](rtl8814au) is required) so this interface is still useful for passive monitoring, for example with Kismet or airodump-ng. NETLINK is also not supported.
+- D-Link DWA-192 (RTL8814au) [dual band] - same as Alfa AWUS1900, only has slightly worse performace
 - TP-Link TL-WN722N v1 (AR9271) [single band] - this interface supports monitor mode and packet injection, but its driver is very unstable and can cause kernel panics and other problems. The interface itself is also prone to overheating. The driver is shipped with kernel.
 
 ## Usage
