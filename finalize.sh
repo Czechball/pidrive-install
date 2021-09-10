@@ -74,9 +74,22 @@ systemctl enable hcx-session
 
 # Disable services taking over wireless interfaces
 
-systemctl --now disable avahi-daemon.service
-systemctl --now disable avahi-daemon.socket
+systemctl --now disable avahi-daemon.service avahi-daemon.socket
 # Not sure if this is necessary? Needs testing
 #systemctl --now disable wpa_supplicant
+
+### TODO ###
+#			  #
+
+# Configure dnsmasq
+
+cp Misc/dnsmasq.conf /etc/
+
+# Generate hostapd config
+
+systemctl --now enable hostapd
+
+#			  #
+### TODO ###
 
 echo "All done."
