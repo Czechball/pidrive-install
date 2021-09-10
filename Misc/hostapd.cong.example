@@ -1,0 +1,36 @@
+# can theoretically run on any ap capable interface, needs testing
+interface=wlan0
+driver=nl80211
+
+#2.4 GHz
+
+hw_mode=g
+channel=5
+ieee80211n=1
+wmm_enabled=1
+
+#5 GHz
+
+# should work on Pi 4 and 3b+, needs testing
+
+#hw_mode=a
+#channel=36
+#country_code=CZ
+#ieee80211d=1
+#ieee80211n=1
+#ieee80211ac=1
+#wmm_enabled=1
+
+macaddr_acl=0
+# hidden ssid
+ignore_broadcast_ssid=1
+
+auth_algs=1
+# maybe we could use wpa3? apparently needs custom hostapd build
+wpa=2
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP
+
+ssid=internet
+# should be generated or user input?
+wpa_passphrase=12345678

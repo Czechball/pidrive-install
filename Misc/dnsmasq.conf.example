@@ -1,0 +1,22 @@
+# Configuration file for dnsmasq.
+#
+# Format is one option per line, legal options are the same
+# as the long options legal on the command line. See
+# "/usr/sbin/dnsmasq --help" or "man 8 dnsmasq" for details.
+
+# If you want dnsmasq to listen for DHCP and DNS requests only on
+# specified interfaces (and the loopback) give the name of the
+# interface (eg eth0) here.
+# Repeat the line for more than one interface.
+interface=wlan0
+
+# Uncomment this to enable the integrated DHCP server, you need
+# to supply the range of addresses available for lease and optionally
+# a lease time. If you have more than one network, you will need to
+# repeat this for each network on which you want to supply DHCP
+# service.
+dhcp-range=192.168.0.50,192.168.0.150,12h
+
+# Delays sending DHCPOFFER and proxydhcp replies for at least the specified number of seconds.
+dhcp-mac=set:client_is_a_pi,B8:27:EB:*:*:*
+dhcp-reply-delay=tag:client_is_a_pi,2
