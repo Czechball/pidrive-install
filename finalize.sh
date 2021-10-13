@@ -82,5 +82,6 @@ systemctl --now disable avahi-daemon.socket
 # Create whitelist file
 
 touch /opt/wardriving/whitelist.txt
+touch /opt/wardriving/whitelist-client.txt
 
 echo "All done."

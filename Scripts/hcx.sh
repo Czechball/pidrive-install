@@ -18,10 +18,10 @@ wardrive()
 {
         HCX_OPTS=$(grep "$INTERFACE" /opt/wardriving/interfaces.txt | cut -d ";" -f 3)
         if [[ $HCX_OPTS == "" ]]; then
-                hcxdumptool --error_max=1 -i $INTERFACE -o $DIRECTORY/$SESSION/$INTERFACE-capture.pcapng --disable_client_attacks --enable_status=95 --filtermode=1 --filterlist_ap=/opt/wardriving/whitelist.txt
+                hcxdumptool --error_max=1 -i $INTERFACE -o $DIRECTORY/$SESSION/$INTERFACE-capture.pcapng --disable_client_attacks --enable_status=95 --filtermode=1 --filterlist_ap=/opt/wardriving/whitelist.txt --filterlist_client=/opt/wardriving/whitelist-client.txt
 
         else
-                hcxdumptool --error_max=1 -i $INTERFACE -o $DIRECTORY/$SESSION/$INTERFACE-capture.pcapng --disable_client_attacks --enable_status=95 --filtermode=1 --filterlist_ap=/opt/wardriving/whitelist.txt $HCX_OPTS
+                hcxdumptool --error_max=1 -i $INTERFACE -o $DIRECTORY/$SESSION/$INTERFACE-capture.pcapng --disable_client_attacks --enable_status=95 --filtermode=1 --filterlist_ap=/opt/wardriving/whitelist.txt --filterlist_client=/opt/wardriving/whitelist-client.txt $HCX_OPTS
         fi
 }
 
