@@ -25,7 +25,7 @@ if (which hcxdumptool); then
 	echo "hcxdumptool is already installed"
 else
 	echo "hcxdumptool not found, installing..."
-	make-git "https://github.com/ZerBea/hcxdumptool.git" hcxdumptool
+	sudo -u pi bash -c "cd ~;git clone \"https://github.com/ZerBea/hcxdumptool.git\";cd hcxdumptool;git reset --hard ef9ef4b;make;sudo make install"
 fi
 
 # Clone and install hcxtools
