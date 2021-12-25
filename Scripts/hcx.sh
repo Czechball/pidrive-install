@@ -8,7 +8,7 @@ else
         SESSION="0000"
 fi
 
-mkdir "$DIRECTORY"/"$SESSION"
+mkdir -p "$DIRECTORY"/"$SESSION"
 
 ip link set "$INTERFACE" down
 iw dev "$INTERFACE" set type monitor
