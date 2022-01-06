@@ -76,8 +76,6 @@ systemctl enable hcx-session
 
 systemctl --now disable avahi-daemon.service
 systemctl --now disable avahi-daemon.socket
-# Not sure if this is necessary? Needs testing
-#systemctl --now disable wpa_supplicant
 
 # Create whitelist file
 
