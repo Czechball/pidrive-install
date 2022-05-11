@@ -40,10 +40,15 @@ echo "Reinstalling kernel headers so we can compile drivers... (this might take 
 
 mount -o remount,rw /boot
 
-# "Repair" raspberry pi kernel headers - work in  progress
-apt --reinstall install raspberrypi-kernel raspberrypi-kernel-headers -y
-rm -rf /lib/modules/*/build
-apt --reinstall install raspberrypi-kernel-headers -y
+## "Repair" raspberry pi kernel headers
+## Disabled, the preffered way is to build kernel headers from Linux source
+# apt --reinstall install raspberrypi-kernel raspberrypi-kernel-headers -y
+# rm -rf /lib/modules/*/build
+# apt --reinstall install raspberrypi-kernel-headers -y
+
+## TODO - Build and install kernel headers from Linux source
+## (detect current kernel version, clone the proper branch, build and install kernel headers)
+# sudo -u pi bash -c "cd ~;git clone \"https://github.com/raspberrypi/linux\" linux-source;cd linux-source;make bcm2711_defconfig;sudo make headers_install INSTALL_HDR_PATH=/usr"
 
 # Update and upgrade the system, install dependencies
 
@@ -55,9 +60,5 @@ echo "Installing dependencies..."
 apt install -y $PACKAGES
 
 echo "To finish the kernel-headers fix, please reboot. Then run $SCRIPTPATH/finalize.sh"
-
-##
-#idk if this works, needs testing
-#this needs to be moved into another script to be executed after reboot after kernel "repair"
 
 printf "\n----------\nTo finish pidrive-install, please run $SCRIPTPATH/finalize.sh\n----------\n" >> /etc/motd
