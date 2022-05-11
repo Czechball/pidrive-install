@@ -48,9 +48,10 @@ fi
 
 # idk how to check for presence of this driver so it's going to be compiled and installed regardless
 
-echo "installing realtek_rtwifi by Kimocoder..."
+## Disabled realtek_rtwifi build, currently broken
+# echo "installing realtek_rtwifi by Kimocoder..."
 
-make-git "https://github.com/kimocoder/realtek_rtwifi.git" realtek_rtwifi
+# make-git "https://github.com/kimocoder/realtek_rtwifi.git" realtek_rtwifi
 
 echo "installing rtl8812au..."
 
