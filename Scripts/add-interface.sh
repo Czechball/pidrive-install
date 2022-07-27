@@ -14,7 +14,7 @@ read_interface()
    INTERFACE_NAME=${INTERFACE_NAME:-$INTERFACE}
 }
 
-INTERFACES=$(hcxdumptool -I | tail -n +2 | cut -d " " -f 2)
+INTERFACES=$(hcxdumptool -I | tail -n +2 | cut -f 3)
 INTERFACES=($INTERFACES)
 
 for ITEM in ${INTERFACES[@]}; do
