@@ -1,0 +1,14 @@
+[Unit]
+Description=Automated pcapng uploading
+After=network.target
+
+[Service]
+User=pi
+Group=pi
+Restart=always
+RestartSec=10
+Type=simple
+ExecStart=/usr/bin/autoupload.sh
+
+[Install]
+WantedBy=default.target
