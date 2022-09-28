@@ -12,12 +12,16 @@ loop()
 
 upload()
 {
+        LAST_SESSION=$(tail -n1 "/opt/wardriving/sessions.txt")
+        # shellcheck disable=SC2162
         while read LINE; do
                 if grep -Fxq "$LINE" ~/.uploaded; then
                         echo "Session $LINE was already uploaded, skipping.."
+                elif [[ $LINE == "$LAST_SESSION" ]]; then
+                        :
                 else
                         echo "Session $LINE not uploaded yet, uploading.."
-                        /home/$USER/wpa-sec-api/upload-pcapng.sh "$WARDRIVE_DIR""$LINE"/* || retry
+                        /home/"$USER"/wpa-sec-api/upload-pcapng.sh "$WARDRIVE_DIR""$LINE"/* || retry
                         echo "Session $LINE uploaded succesfully"
                         echo "$LINE" >> ~/.uploaded
                 fi
