@@ -18,7 +18,7 @@ upload()
                 if grep -Fxq "$LINE" ~/.uploaded; then
                         echo "Session $LINE was already uploaded, skipping.."
                 elif [[ $LINE == "$LAST_SESSION" ]]; then
-                        :
+                        echo "$LINE is the last session, not uploading"
                 else
                         echo "Session $LINE not uploaded yet, uploading.."
                         /home/"$USER"/wpa-sec-api/upload-pcapng.sh "$WARDRIVE_DIR""$LINE"/* || retry
