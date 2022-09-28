@@ -5,7 +5,7 @@ WARDRIVE_DIR="/opt/wardriving/"
 
 loop()
 {
-        "Uploads finished, waiting for 10m"
+        echo "Uploads finished, waiting for 10m"
         sleep 10m
         upload
 }
