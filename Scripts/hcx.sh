@@ -17,11 +17,12 @@ ip link set "$INTERFACE" up
 wardrive()
 {
         HCX_OPTS=$(grep -w "$INTERFACE" /opt/wardriving/interfaces.txt | cut -d ";" -f 3)
+        # Added this, so in case of need to re-write the command or modify it, you only have to do it in one place
+        START_HCXDUMPTOOL=$(hcxdumptool --errormax=1 -i $INTERFACE -w $DIRECTORY/$SESSION/$INTERFACE-capture.pcapng --disable_deauthentication)
         if [[ $HCX_OPTS == "" ]]; then
-                hcxdumptool --error_max=1 -i $INTERFACE -o $DIRECTORY/$SESSION/$INTERFACE-capture.pcapng --disable_client_attacks --enable_status=95 --filtermode=1 --filterlist_ap=/opt/wardriving/whitelist.txt --filterlist_client=/opt/wardriving/whitelist-client.txt
-
+                $START_HCXDUMPTOOL
         else
-                hcxdumptool --error_max=1 -i $INTERFACE -o $DIRECTORY/$SESSION/$INTERFACE-capture.pcapng --disable_client_attacks --enable_status=95 --filtermode=1 --filterlist_ap=/opt/wardriving/whitelist.txt --filterlist_client=/opt/wardriving/whitelist-client.txt $HCX_OPTS
+                $START_HCXDUMPTOOL $HCX_OPTS
         fi
 }
 
