@@ -34,7 +34,7 @@ sudo -u pi bash -c 'wget http://ftp.uk.debian.org/debian/pool/non-free/f/firmwar
 dpkg -i firmware-misc-nonfree_20190114-2_all.deb
 apt-mark hold firmware-misc-nonfree
 
-echo "Reinstalling kernel headers so we can compile drivers... (this might take a while)"
+# echo "Reinstalling kernel headers so we can compile drivers... (this might take a while)"
 
 # Remount /boot as read-write
 
