@@ -19,6 +19,7 @@ TEMPFILE=$(mktemp)
 
 make-git()
 {
+	export ARCH=arm
 	sudo -u ${NON_ROOT_USER} bash -c "cd ~;git clone \"$1\";cd \"$2\";make;sudo make install"
 }
 
@@ -69,7 +70,7 @@ make-git "https://github.com/aircrack-ng/rtl8812au.git" rtl8812au
 
 echo "installing rtl88x2bu..."
 
-sudo -u ${NON_ROOT_USER} bash -c "cd ~;git clone \"https://github.com/cilynx/rtl88x2bu.git\";cd \"rtl88x2bu\";make ARCH=arm;sudo make install"
+make-git "https://github.com/cilynx/rtl88x2bu.git" rtl88x2bu
 
 cp Scripts/* /usr/bin/
 
