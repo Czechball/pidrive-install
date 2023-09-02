@@ -1,1 +1,1 @@
-pkg-config git libcurl4-openssl-dev libssl-dev hostapd macchanger zip jq build-essential libelf-dev dkms bc linux-source kmod cpio flex libncurses5-dev dwarves openssl
+pkg-config git libcurl4-openssl-dev libssl-dev hostapd macchanger zip jq build-essential libelf-dev dkms bc linux-source kmod cpio flex libncurses5-dev dwarves
