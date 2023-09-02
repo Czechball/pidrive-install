@@ -19,7 +19,16 @@ TEMPFILE=$(mktemp)
 
 make-git()
 {
+	# set environment variable for ALL software, some might need it and it's much simpler to just universally have it
 	export ARCH=arm
+
+	### Software-specific settings go in this section
+	# compile hcxdumptool without GPS and refresh-display support, see https://github.com/ZerBea/hcxdumptool/issues/301#issuecomment-1508011763
+	if [ "$2" = "hcxdumptool"]; do
+		cd \"$2\"; sed -i '/DSTATUSOUT/ s/./#&/' Makefile
+	fi
+
+	# clone the repo, compile and install
 	sudo -u ${NON_ROOT_USER} bash -c "cd ~;git clone \"$1\";cd \"$2\";make;sudo make install"
 }
 
