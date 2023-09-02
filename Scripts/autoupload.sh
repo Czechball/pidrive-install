@@ -21,7 +21,7 @@ upload()
                         echo "$LINE is the last session, not uploading"
                 else
                         echo "Session $LINE not uploaded yet, uploading.."
-                        /home/"$USER"/wpa-sec-api/upload-pcapng.sh "$WARDRIVE_DIR""$LINE"/* || retry
+                        /usr/bin/upload-pcapng.sh "$WARDRIVE_DIR""$LINE"/* || retry
                         echo "Session $LINE uploaded succesfully"
                         echo "$LINE" >> ~/.uploaded
                 fi
