@@ -14,6 +14,16 @@ fi
 
 echo "Warning: This script will only work on Raspberry Pi OS and possibly other Debian based systems."
 
+NON_ROOT_USERS=$(awk -F: '($3>=1000)&&($1!="nobody"){print $1}' /etc/passwd)
+
+echo "Select non-root user:"
+
+select NON_ROOT_USER in "${NON_ROOT_USERS[@]}"; do
+   [ -n "${NON_ROOT_USER}" ] && break
+done
+
+echo "Selected user ${NON_ROOT_USER}, continuing with that..."
+
 # Fix mt7610u drivers, see https://github.com/raspberrypi/firmware/issues/1563
 
 # echo "Checking if the correct version (1:20190114-2+rpt1) of firmware-misc-nonfree is installed... "
@@ -30,7 +40,7 @@ echo "Warning: This script will only work on Raspberry Pi OS and possibly other 
 
 apt update
 
-sudo -u pi bash -c 'wget http://ftp.uk.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-misc-nonfree_20190114-2_all.deb'
+sudo -u ${NON_ROOT_USER} bash -c 'wget http://ftp.uk.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-misc-nonfree_20190114-2_all.deb'
 dpkg -i firmware-misc-nonfree_20190114-2_all.deb
 apt-mark hold firmware-misc-nonfree
 

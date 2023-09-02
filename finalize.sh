@@ -5,11 +5,21 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+NON_ROOT_USERS=$(awk -F: '($3>=1000)&&($1!="nobody"){print $1}' /etc/passwd)
+
+echo "Select non-root user:"
+
+select NON_ROOT_USER in "${NON_ROOT_USERS[@]}"; do
+   [ -n "${NON_ROOT_USER}" ] && break
+done
+
+echo "Selected user ${NON_ROOT_USER}, continuing with that..."
+
 TEMPFILE=$(mktemp)
 
 make-git()
 {
-	sudo -u pi bash -c "cd ~;git clone \"$1\";cd \"$2\";make;sudo make install"
+	sudo -u ${NON_ROOT_USER} bash -c "cd ~;git clone \"$1\";cd \"$2\";make;sudo make install"
 }
 
 # This script should be executed after rebooting after finishing install.sh
@@ -59,7 +69,7 @@ make-git "https://github.com/aircrack-ng/rtl8812au.git" rtl8812au
 
 echo "installing rtl88x2bu..."
 
-sudo -u pi bash -c "cd ~;git clone \"https://github.com/cilynx/rtl88x2bu.git\";cd \"rtl88x2bu\";make ARCH=arm;sudo make install"
+sudo -u ${NON_ROOT_USER} bash -c "cd ~;git clone \"https://github.com/cilynx/rtl88x2bu.git\";cd \"rtl88x2bu\";make ARCH=arm;sudo make install"
 
 cp Scripts/* /usr/bin/
 
