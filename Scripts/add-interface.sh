@@ -60,7 +60,7 @@ echo "$MAC;$INTERFACE_NAME" >> /opt/wardriving/interfaces.txt
 echo "Enabling service"
 systemctl enable hcx@"$INTERFACE_NAME" --now
 
-echo "Reĺoading udev rules..."
+echo "Reloading udev rules..."
 udevadm control --reload-rules
 udevadm trigger --attr-match="subsystem=net"
 echo "Done, interface $INTERFACE_NAME was added. You should reconnect the interface now, just to be sure"

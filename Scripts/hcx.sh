@@ -18,7 +18,7 @@ wardrive()
 {
         HCX_OPTS=$(grep -w "$INTERFACE" /opt/wardriving/interfaces.txt | cut -d ";" -f 3)
         # Added this, so in case of need to re-write the command or modify it, you only have to do it in one place
-        START_HCXDUMPTOOL=$(hcxdumptool --errormax=1 -i $INTERFACE -w $DIRECTORY/$SESSION/$INTERFACE-capture.pcapng --disable_deauthentication)
+        START_HCXDUMPTOOL=$(hcxdumptool --errormax=1 --onerror=reboot -i $INTERFACE -w $DIRECTORY/$SESSION/$INTERFACE-capture.pcapng --disable_deauthentication)
         if [[ $HCX_OPTS == "" ]]; then
                 $START_HCXDUMPTOOL
         else
