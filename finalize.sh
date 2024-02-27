@@ -5,11 +5,44 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+NON_ROOT_USERS=$(awk -F: '($3>=1000)&&($1!="nobody"){print $1}' /etc/passwd)
+
+echo "Select non-root user:"
+
+select NON_ROOT_USER in "${NON_ROOT_USERS[@]}"; do
+   [ -n "${NON_ROOT_USER}" ] && break
+done
+
+echo "Selected user ${NON_ROOT_USER}, continuing with that..."
+
 TEMPFILE=$(mktemp)
 
 make-git()
 {
-	sudo -u pi bash -c "cd ~;git clone \"$1\";cd \"$2\";make;sudo make install"
+	# set environment variable for ALL software, some might need it and it's much simpler to just universally have it
+	export ARCH=arm
+
+	### Software-specific settings go in this section
+	# compile hcxdumptool without GPS and refresh-display support, see https://github.com/ZerBea/hcxdumptool/issues/301#issuecomment-1508011763
+	if [ "$2" = "hcxdumptool"]; do
+		cd \"$2\"; sed -i '/DSTATUSOUT/ s/./#&/' Makefile
+	fi
+
+	# compile hcxtools without refresh-display support, see https://github.com/ZerBea/hcxdumptool#solve-dependencies
+	if [ "$2" = "hcxtools"]; do
+		cd \"$2\"; sed -i '/DSTATUSOUT/ s/./#&/' Makefile
+	fi
+
+	# TODO: recognize platform and set proper Makefile settings according to https://github.com/aircrack-ng/rtl8812au#for-raspberry-rpi
+	# depends on raspberrypi-kernel-headers, which we are trying to compile but it's broken/not implemented yet?
+
+	# compile rtl88x2bu for Raspberry pi, according to https://github.com/cilynx/rtl88x2bu#raspberry-pi-access-point, lines 16-17
+	if [ "$2" = "rtl88x2bu"]; do
+		cd \"$2\"; sed -i 's/I386_PC = y/I386_PC = n/' Makefile; sed -i 's/ARM_RPI = n/ARM_RPI = y/' Makefile
+	fi
+
+	# clone the repo, compile and install
+	sudo -u ${NON_ROOT_USER} bash -c "cd ~;git clone \"$1\";cd \"$2\";make;sudo make install"
 }
 
 # This script should be executed after rebooting after finishing install.sh
@@ -59,7 +92,7 @@ make-git "https://github.com/aircrack-ng/rtl8812au.git" rtl8812au
 
 echo "installing rtl88x2bu..."
 
-sudo -u pi bash -c "cd ~;git clone \"https://github.com/cilynx/rtl88x2bu.git\";cd \"rtl88x2bu\";make ARCH=arm;sudo make install"
+make-git "https://github.com/cilynx/rtl88x2bu.git" rtl88x2bu
 
 cp Scripts/* /usr/bin/
 
